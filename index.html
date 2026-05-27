@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>烤箱使用管理</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Oven Scheduler</p>
+        <h1>烤箱使用管理</h1>
+        <p class="sync-status" id="syncStatus">本機模式</p>
+      </div>
+      <div class="clock" id="clock">--:--</div>
+    </header>
+
+    <main class="layout">
+      <section class="panel booking-panel" aria-labelledby="booking-title">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Register</p>
+            <h2 id="booking-title">登記使用</h2>
+          </div>
+          <button class="icon-button" id="clearFormButton" type="button" title="清空表單" aria-label="清空表單">
+            ↺
+          </button>
+        </div>
+
+        <form id="bookingForm" class="booking-form">
+          <label>
+            部門
+            <select id="department" name="department" required>
+              <option value="">請選擇部門</option>
+              <option value="CCP6">CCP6</option>
+              <option value="NVM">NVM</option>
+            </select>
+          </label>
+
+          <label>
+            名字
+            <input id="userName" name="userName" autocomplete="name" required placeholder="例如：小明" />
+          </label>
+
+          <label>
+            使用哪個烤箱
+            <select id="ovenId" name="ovenId" required>
+              <option value="">請選擇烤箱</option>
+              <option value="1">烤箱 1</option>
+              <option value="2">烤箱 2</option>
+              <option value="3">烤箱 3</option>
+              <option value="4">烤箱 4</option>
+              <option value="5">烤箱 5</option>
+              <option value="6">烤箱 6</option>
+            </select>
+          </label>
+
+          <label>
+            開始使用時間
+            <input id="startTime" name="startTime" type="datetime-local" required />
+          </label>
+
+          <label>
+            結束使用時間
+            <input id="endTime" name="endTime" type="datetime-local" required />
+          </label>
+
+          <button class="primary-button" type="submit">送出登記</button>
+        </form>
+      </section>
+
+      <section class="panel map-panel" aria-labelledby="map-title">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Layout</p>
+            <h2 id="map-title">烤箱位置</h2>
+          </div>
+        </div>
+        <div class="oven-map" id="ovenMap" aria-live="polite"></div>
+      </section>
+
+      <section class="panel timeline-panel" aria-labelledby="timeline-title">
+        <div class="section-head timeline-head">
+          <div>
+            <p class="eyebrow">Timeline</p>
+            <h2 id="timeline-title">使用時間</h2>
+          </div>
+          <div class="month-controls">
+            <button class="icon-button" id="prevMonthButton" type="button" title="上個月" aria-label="上個月">‹</button>
+            <div class="month-label" id="monthLabel">----</div>
+            <button class="icon-button" id="nextMonthButton" type="button" title="下個月" aria-label="下個月">›</button>
+            <button class="secondary-button danger" id="clearAllButton" type="button">清除資料</button>
+          </div>
+        </div>
+        <div class="timeline-legend" id="timelineLegend"></div>
+        <div class="timeline-scroller">
+          <div class="timeline" id="timeline"></div>
+        </div>
+      </section>
+    </main>
+
+    <template id="ovenCardTemplate">
+      <button class="oven-card" type="button">
+        <span class="oven-number"></span>
+        <span class="oven-label"></span>
+        <span class="oven-status"></span>
+      </button>
+    </template>
+
+    <script src="./config.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
